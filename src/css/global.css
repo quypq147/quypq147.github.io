@@ -1,0 +1,19 @@
+body {
+  overflow: hidden;
+}
+
+#main {
+  z-index: 1;
+  position: relative;
+}
+#main .bg-img {
+  opacity: 0.6;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: auto;
+  z-index: 0;
+}
+
+/*# sourceMappingURL=global.css.map */
