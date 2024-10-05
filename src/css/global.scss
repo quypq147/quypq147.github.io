@@ -1,32 +1,100 @@
-body{
-    overflow: hidden;
-    display: flex;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+
+$bg-color: #2c3e50;
+
+$font-color: #ecf0f1;
+
+$fs-base: 1rem;
+
+$fs-300: 0.75rem;
+$fs-500: 1.25rem;
+$fs-600: 1.5rem;
+$fs-700: 1.75rem;
+$fs-800: 2rem;
+$fs-900:5rem;
+
+$fw-400: 400;
+$fw-500: 500;
+$fw-700: 700;
+$fw-800: 800;
+
+$font-family: 'Roboto Mono', monospace;
+
+body {
+    background-color: $bg-color;
+    font-family: $font-family;
+    display: grid;
+    align-items: center;
     justify-content: center;
     min-height: 100vh;
+    overflow: hidden;
 }
-.bg{
-    min-height: auto;
-    position:relative;
+.main-para{
+    text-align: center;
+    font-size: $fs-900;
+    color:#fff;
+    box-shadow: #2c3e50;
 }
-.bg::before{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url("../../assets/bg.gif");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-.profile{
-    display: grid;
+.portfolio-container {
+    display: flex;
     grid-template-columns: 1fr 1fr;
     gap: 10rem;
-    align-items: center;
-    .profile-img{
-        border-radius: 50%;
-        width: 10rem;
+
+    .box_ava {
+        border: 2px solid #fff;
+        width: 20rem;
+        height: 20rem;
+        border-radius: 30% 70% 55% 45% / 30% 40% 60% 70%;
+        background-image: url("../../assets/images/profile-img.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        animation: morph 2s ease-in-out infinite;
     }
-}  
+
+    @keyframes morph {
+        0% {
+            border-radius: 30% 70% 55% 45% / 30% 40% 60% 70%;
+        }
+
+        50% {
+            border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+        }
+
+        75% {
+            border-radius: 30% 70% 55% 45% / 30% 2% 98% 70%;
+        }
+
+        100% {
+            border-radius: 30% 70% 55% 45% / 30% 40% 60% 70%;
+        }
+    }
+
+    .content {
+        display: grid;
+        .intro{
+            color:#ecf0f1;
+        }
+        .link-social-ctn {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            .para-1{
+                color:#ecf0f1;
+            }
+            .social-item {
+                width: 4rem;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .portfolio-container {
+        margin-left: 2rem;
+        flex-direction: column;
+        gap: 5rem;
+        text-align: center;
+        align-items: center;
+    }
+}
