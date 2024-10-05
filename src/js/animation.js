@@ -1,4 +1,5 @@
 //just copy from chadselph/jquery-typewriter .Thanks for the author.
+
 (function ($) {
     $.fn.typewrite = function (options) {
         var settings = {
