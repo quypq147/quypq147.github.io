@@ -9,30 +9,67 @@
     <link rel="stylesheet" href="./src/css/global.css">
     <link rel="icon" href="../assets/ico/profile-img.ico" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    
+
     <title>Phan Quy's Portfolio</title>
 </head>
 
 <body>
     <h1 id="type"></h1>
-    <div class="portfolio-container">
-        <div class="box_ava">
+    <div class="carousel-container">
+        <ul class="carousel-tab">
+            <li class="carousel-tab-item"><a class="carousel-tab-txt">About Me</a></li>
+            <li class="carousel-tab-item"><a class="carousel-tab-txt">My Skills</a></li>
+            <li class="carousel-tab-item"><a class="carousel-tab-txt">My Projects</a></li>
+        </ul>
+        <div class="carousel-track">
+            <div class="carousel-item">
+                <div class="portfolio-container container">
+                    <div class="box_ava"></div>
+                    <div class="content">
+                        <div class="intro">
+                            Hi I'm Phan Quy.<br>
+                            Just a student can code.<br>
+                            I'm interested in web technology stack like Mern , Lamp , ... <br>
+                        </div>
+                        <div class="link-social-ctn">
+                            <h4 class="para-1">My Social NetWork: </h4>
+                            <a href="https://github.com/quypq147">
+                                <img class="social-item" src="./assets/images/github.png" alt="github">
+                            </a>
+                            <a href="https://www.facebook.com/profile.php?id=100080304798053">
+                                <img class="social-item" src="./assets/images/facebook.png" alt="facebook">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="skills-container container">
+                    <h4 class="para-1">My Skills: </h4>
+                    <div class="skills">
+                        <div class="skills-list">
+                            <div class="skills-item">
+                                <img class="skills-img" src="./assets/images/skills/nextjs.png" alt="nextjs">
+                                <p>NextJs</p>
+                            </div>
+                            <div class="skills-item">
+                                <img class="skills-img" src="./assets/images/skills/react.png" alt="react">
+                                <p>ReactJs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="project-container">
+                    <h4 class="para-1">My Projects:</h4>
+                    <p>Coming soon...</p>
+                </div>
+            </div>
         </div>
-        <div class="content">
-            <div class="intro">
-                Hi I'm Phan Quy.<br>
-                Just a student can code.<br>
-                I'm interested in web technology stack like Mern , Lamp , ... <br>
-            </div>
-            <div class="link-social-ctn">
-                <h4 class="para-1">My Social NetWork: </h4>
-                <a href="https://github.com/quypq147">
-                    <img class="social-item" src="./assets/images/github.png" alt="github">
-                </a>
-                <a href="https://www.facebook.com/profile.php?id=100080304798053">
-                    <img class="social-item" src="./assets/images/facebook.png" alt="facebook">
-                </a>
-            </div>
+        <div class="carousel-controls">
+            <button class="carousel-button prev">❮</button>
+            <button class="carousel-button next">❯</button>
         </div>
     </div>
     <script src="./src/js/animation.js"></script>

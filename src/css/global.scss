@@ -12,7 +12,7 @@ $fs-500: 1.25rem;
 $fs-600: 1.5rem;
 $fs-700: 1.75rem;
 $fs-800: 2rem;
-$fs-900:5rem;
+$fs-900: 5rem;
 
 $fw-400: 400;
 $fw-500: 500;
@@ -30,11 +30,13 @@ body {
     min-height: 100vh;
     overflow: hidden;
 }
-#type{
+
+#type {
     font-size: $fs-800;
     font-weight: $fw-800;
     text-align: center;
 }
+
 .portfolio-container {
     display: flex;
     grid-template-columns: 1fr 1fr;
@@ -71,18 +73,141 @@ body {
 
     .content {
         display: grid;
-        .intro{
-            color:#ecf0f1;
+
+        .intro {
+            color: #ecf0f1;
         }
+
         .link-social-ctn {
             display: flex;
             justify-content: center;
             gap: 4rem;
-            .para-1{
-                color:#ecf0f1;
+
+            .para-1 {
+                color: #ecf0f1;
             }
+
             .social-item {
                 width: 4rem;
+            }
+        }
+    }
+}
+.skills-container{
+    .para-1{
+        color: #ecf0f1;
+    }
+    .skills{
+        .skills-list{
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            .skills-item{
+                background-color: #ecf0f1;
+                color: $bg-color;
+                padding: 1rem;
+                border-radius: 5px;
+                font-size: $fs-500;
+                font-weight: $fw-500;
+                transition: all 0.3s ease-in-out;
+
+                &:hover{
+                    transform: scale(1.05);
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                }
+                .skills-img{
+                    width: 3rem;
+                    height: 3rem;
+                    margin-right: 1rem;
+                }
+            }
+        }
+    }
+}
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 2rem auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    .carousel-tab{
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        list-style-type: none;
+
+        .carousel-tab-item {
+            background-color: rgba(236, 240, 241, 0.2);
+            color: #ecf0f1;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: rgba(236, 240, 241, 0.4);
+            }
+        }
+    }
+    .carousel-track {
+        display: flex;
+        transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); // Smooth easing
+    }
+
+    .carousel-item {
+        min-width: 100%;
+        box-sizing: border-box;
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:nth-child(odd) {
+            background-color: rgba(236, 240, 241, 0.1); // Alternating background
+        }
+
+        &:nth-child(even) {
+            background-color: rgba(236, 240, 241, 0.05);
+        }
+    }
+
+    .carousel-controls {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        transform: translateY(-50%);
+        pointer-events: none;
+
+        .carousel-button {
+            pointer-events: all;
+            background: none;
+            color: #ecf0f1;
+            border: none;
+            
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            transition: background-color 0.3s ease;
+
+            
+        }
+    }
+}
+
+// Responsive styles for carousel
+@media screen and (max-width: 768px) {
+    .carousel-container {
+        max-width: 100%;
+        .carousel-controls {
+            .carousel-button {
+                font-size: 1.2rem;
+                padding: 0.6rem 1rem;
             }
         }
     }
@@ -96,8 +221,9 @@ body {
         gap: 5rem;
         text-align: center;
         align-items: center;
-        .content{
-            gap:2rem;
+
+        .content {
+            gap: 2rem;
         }
     }
 }

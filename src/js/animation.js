@@ -1,5 +1,59 @@
-//just copy from chadselph/jquery-typewriter .Thanks for the author.
 
+
+// Animation for the carousel
+// This code handles the carousel functionality, including auto-sliding and button controls.
+const track = document.querySelector('.carousel-track');
+const items = Array.from(track.children);
+const nextButton = document.querySelector('.carousel-button.next');
+const prevButton = document.querySelector('.carousel-button.prev');
+
+let currentIndex = 0;
+let autoSlideInterval;
+
+// Update carousel position
+function updateCarousel() {
+    const itemWidth = items[0].getBoundingClientRect().width;
+    track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+}
+
+// Move to the next slide
+function moveToNext() {
+    currentIndex = (currentIndex + 1) % items.length;
+    updateCarousel();
+}
+
+// Move to the previous slide
+function moveToPrev() {
+    currentIndex = (currentIndex - 1 + items.length) % items.length;
+    updateCarousel();
+}
+
+// Auto-slide functionality
+function startAutoSlide() {
+    autoSlideInterval = setInterval(moveToNext, 5000); // Slide every 5 seconds
+}
+
+function stopAutoSlide() {
+    clearInterval(autoSlideInterval);
+}
+
+// Event listeners for buttons
+nextButton.addEventListener('click', () => {
+    stopAutoSlide();
+    moveToNext();
+    startAutoSlide();
+});
+
+prevButton.addEventListener('click', () => {
+    stopAutoSlide();
+    moveToPrev();
+    startAutoSlide();
+});
+
+// Start auto-slide on page load
+startAutoSlide();
+// Typewriter effect for the text
+//just copy from chadselph/jquery-typewriter .Thanks for the author.
 (function ($) {
     $.fn.typewrite = function (options) {
         var settings = {
