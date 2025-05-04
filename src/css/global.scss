@@ -94,6 +94,9 @@ body {
     }
 }
 .skills-container{
+    display: flex;
+    flex-direction: column;
+    gap:2rem;
     .para-1{
         color: #ecf0f1;
     }
@@ -123,6 +126,17 @@ body {
                 }
             }
         }
+    }
+}
+.project-container {
+    display: flex;
+    flex-direction: column;
+    gap:2rem;
+    .para-1 {
+        color: #ecf0f1;
+    }
+    p{
+        color: #ecf0f1;
     }
 }
 .carousel-container {
