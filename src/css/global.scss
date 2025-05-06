@@ -147,13 +147,13 @@ body {
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    .carousel-tab{
+    .carousel-tab {
         display: flex;
         justify-content: center;
         gap: 1rem;
         margin-bottom: 1rem;
         list-style-type: none;
-
+    
         .carousel-tab-item {
             background-color: rgba(236, 240, 241, 0.2);
             color: #ecf0f1;
@@ -161,7 +161,12 @@ body {
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-
+    
+            &.active {
+                background-color: rgba(236, 240, 241, 0.6);
+                font-weight: bold;
+            }
+    
             &:hover {
                 background-color: rgba(236, 240, 241, 0.4);
             }
