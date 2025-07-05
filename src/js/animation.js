@@ -6,7 +6,10 @@ const track = document.querySelector('.carousel-track');
 const items = Array.from(track.children);
 const nextButton = document.querySelector('.carousel-button.next');
 const prevButton = document.querySelector('.carousel-button.prev');
+const carousel_tab = document.querySelector('.carousel-tab');
+const carousel_tabs = Array.from(document.querySelectorAll('.carousel-tab-item'));
 
+// Set initial position and index
 let currentIndex = 0;
 let autoSlideInterval;
 
@@ -52,6 +55,22 @@ prevButton.addEventListener('click', () => {
 
 // Start auto-slide on page load
 startAutoSlide();
+
+// Change tab functionality
+window.changeTab = function(index) {
+    stopAutoSlide();
+    currentIndex = index;
+    updateCarousel();
+    startAutoSlide();
+    // Update active tab styling
+    carousel_tabs.forEach((tab, i) => {
+        if (i === index) {
+            tab.classList.add('active');
+        } else {
+            tab.classList.remove('active');
+        }
+    });
+};
 // Typewriter effect for the text
 //just copy from chadselph/jquery-typewriter .Thanks for the author.
 (function ($) {
@@ -105,6 +124,14 @@ $(document).ready(function () {
         'trim': true,
         'callback': function () {
             $('#type').css('color', 'white'); // Change color after typing
+        }
+    });
+    // Set initial active tab
+    carousel_tabs.forEach((tab, i) => {
+        if (i === 0) {
+            tab.classList.add('active');
+        } else {
+            tab.classList.remove('active');
         }
     });
 });

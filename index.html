@@ -17,19 +17,19 @@
     <h1 id="type"></h1>
     <div class="carousel-container">
         <ul class="carousel-tab">
-            <li class="carousel-tab-item"><a class="carousel-tab-txt">About Me</a></li>
-            <li class="carousel-tab-item"><a class="carousel-tab-txt">My Skills</a></li>
-            <li class="carousel-tab-item"><a class="carousel-tab-txt">My Projects</a></li>
+            <li class="carousel-tab-item" value="0" onclick="changeTab(0)"><a class="carousel-tab-txt">About Me</a></li>
+            <li class="carousel-tab-item" value="1" onclick="changeTab(1)"><a class="carousel-tab-txt">My Skills</a></li>
+            <li class="carousel-tab-item" value="2" onclick="changeTab(2)"><a class="carousel-tab-txt">My Projects</a></li>
         </ul>
         <div class="carousel-track">
-            <div class="carousel-item">
+            <div class="carousel-item" value="0">
                 <div class="portfolio-container container">
                     <div class="box_ava"></div>
                     <div class="content">
                         <div class="intro">
                             Hi I'm Phan Quy.<br>
                             Just a student can code.<br>
-                            I'm interested in web technology stack like Mern , Lamp , ... <br>
+                            I'm interested in web technology stack <br>
                         </div>
                         <div class="link-social-ctn">
                             <h4 class="para-1">My Social NetWork: </h4>
@@ -43,7 +43,7 @@
                     </div>
                 </div>
             </div>
-            <div class="carousel-item">
+            <div class="carousel-item" value="1">
                 <div class="skills-container container">
                     <h4 class="para-1">My Skills: </h4>
                     <div class="skills">
@@ -56,11 +56,19 @@
                                 <img class="skills-img" src="./assets/images/skills/react.png" alt="react">
                                 <p>ReactJs</p>
                             </div>
+                            <div class="skills-item">
+                                <img class="skills-img" src="./assets/images/skills/bootstrap.png" alt="Bootstrap">
+                                <p>Bootstrap</p>
+                            </div>
+                            <div class="skills-item">
+                                <img class="skills-img" src="./assets/images/skills/sass.png" alt="sass">
+                                <p>Sass</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="carousel-item">
+            <div class="carousel-item" value="2">
                 <div class="project-container">
                     <h4 class="para-1">My Projects:</h4>
                     <p>Coming soon...</p>
