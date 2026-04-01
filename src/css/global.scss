@@ -24,11 +24,12 @@ $font-family: 'Roboto Mono', monospace;
 body {
     background-color: $bg-color;
     font-family: $font-family;
-    display: grid;
+    display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 #type {
@@ -93,20 +94,24 @@ body {
         }
     }
 }
-.skills-container{
+
+.skills-container {
     display: flex;
     flex-direction: column;
-    gap:2rem;
-    .para-1{
+    gap: 2rem;
+
+    .para-1 {
         color: #ecf0f1;
     }
-    .skills{
-        .skills-list{
+
+    .skills {
+        .skills-list {
             display: flex;
             justify-content: center;
             gap: 2rem;
             flex-wrap: wrap;
-            .skills-item{
+
+            .skills-item {
                 background-color: #ecf0f1;
                 color: $bg-color;
                 padding: 1rem;
@@ -115,11 +120,12 @@ body {
                 font-weight: $fw-500;
                 transition: all 0.3s ease-in-out;
 
-                &:hover{
+                &:hover {
                     transform: scale(1.05);
                     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
                 }
-                .skills-img{
+
+                .skills-img {
                     width: 3rem;
                     height: 3rem;
                     margin-right: 1rem;
@@ -128,77 +134,99 @@ body {
         }
     }
 }
+
 .project-container {
     display: flex;
     flex-direction: column;
-    gap:2rem;
+    gap: 2rem;
+
     .para-1 {
         color: #ecf0f1;
     }
-    p{
+
+    p {
         color: #ecf0f1;
     }
 }
+
+
+
 .carousel-container {
-    position: relative;
     width: 100%;
     max-width: 900px;
     margin: 2rem auto;
     overflow: hidden;
+    display: grid;
+    position: relative;
+    grid-template-areas: "carousel";
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    .carousel-tab {
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-        margin-bottom: 1rem;
-        list-style-type: none;
-    
-        .carousel-tab-item {
-            background-color: rgba(236, 240, 241, 0.2);
-            color: #ecf0f1;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-    
-            &.active {
-                background-color: rgba(236, 240, 241, 0.6);
-                font-weight: bold;
-            }
-    
-            &:hover {
-                background-color: rgba(236, 240, 241, 0.4);
-            }
-        }
+
+    .personal-intro {
+        display: grid;
+        min-height: 100vh;
+        text-align: center;
+        color: #ecf0f1;
     }
+
     .carousel-track {
-        display: flex;
+        display: grid;
         transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); // Smooth easing
     }
 
     .carousel-item {
+        grid-area: carousel;
         min-width: 100%;
+        min-height: 100vh;
         box-sizing: border-box;
         padding: 1rem;
-        display: flex;
+        display: grid;
         justify-content: center;
         align-items: center;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        z-index: 0;
+    }
 
-        &:nth-child(odd) {
-            background-color: rgba(236, 240, 241, 0.1); // Alternating background
-        }
+    .carousel-item.is-active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        z-index: 2;
+    }
 
-        &:nth-child(even) {
-            background-color: rgba(236, 240, 241, 0.05);
-        }
+    .carousel-item.animating-in-left,
+    .carousel-item.animating-in-right,
+    .carousel-item.animating-out-left,
+    .carousel-item.animating-out-right {
+        visibility: visible;
+        pointer-events: none;
+    }
+
+    .carousel-item.animating-in-right {
+        animation: slide-in-right 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .carousel-item.animating-in-left {
+        animation: slide-in-left 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .carousel-item.animating-out-left {
+        animation: slide-out-left 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+        z-index: 1;
+    }
+
+    .carousel-item.animating-out-right {
+        animation: slide-out-right 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+        z-index: 1;
     }
 
     .carousel-controls {
         position: absolute;
         top: 50%;
         width: 100%;
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         justify-content: space-between;
         transform: translateY(-50%);
         pointer-events: none;
@@ -208,13 +236,87 @@ body {
             background: none;
             color: #ecf0f1;
             border: none;
-            
+
             cursor: pointer;
             border-radius: 50%;
             font-size: 1.5rem;
             transition: background-color 0.3s ease;
 
-            
+
+        }
+    }
+}
+
+@keyframes slide-in-right {
+    from {
+        transform: translateX(42px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in-left {
+    from {
+        transform: translateX(-42px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-out-left {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateX(-42px);
+        opacity: 0;
+    }
+}
+
+@keyframes slide-out-right {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateX(42px);
+        opacity: 0;
+    }
+}
+
+.carousel-tab {
+    display: grid;
+    gap: 1rem;
+    position: absolute;
+    right: 10px;
+    top: 250px;
+
+    list-style-type: none;
+
+    .carousel-tab-item {
+        color: #ecf0f1;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &.active {
+            font-weight: bold;
+        }
+
+        &:hover {
+            font-weight: bold;
         }
     }
 }
@@ -223,6 +325,7 @@ body {
 @media screen and (max-width: 768px) {
     .carousel-container {
         max-width: 100%;
+
         .carousel-controls {
             .carousel-button {
                 font-size: 1.2rem;

@@ -1,78 +1,3 @@
-
-
-// Animation for the carousel
-// This code handles the carousel functionality, including auto-sliding and button controls.
-const track = document.querySelector('.carousel-track');
-const items = Array.from(track.children);
-const nextButton = document.querySelector('.carousel-button.next');
-const prevButton = document.querySelector('.carousel-button.prev');
-const carousel_tab = document.querySelector('.carousel-tab');
-const carousel_tabs = Array.from(document.querySelectorAll('.carousel-tab-item'));
-
-// Set initial position and index
-let currentIndex = 0;
-let autoSlideInterval;
-
-// Update carousel position
-function updateCarousel() {
-    const itemWidth = items[0].getBoundingClientRect().width;
-    track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
-}
-
-// Move to the next slide
-function moveToNext() {
-    currentIndex = (currentIndex + 1) % items.length;
-    updateCarousel();
-}
-
-// Move to the previous slide
-function moveToPrev() {
-    currentIndex = (currentIndex - 1 + items.length) % items.length;
-    updateCarousel();
-}
-
-// Auto-slide functionality
-function startAutoSlide() {
-    autoSlideInterval = setInterval(moveToNext, 5000); // Slide every 5 seconds
-}
-
-function stopAutoSlide() {
-    clearInterval(autoSlideInterval);
-}
-
-// Event listeners for buttons
-nextButton.addEventListener('click', () => {
-    stopAutoSlide();
-    moveToNext();
-    startAutoSlide();
-});
-
-prevButton.addEventListener('click', () => {
-    stopAutoSlide();
-    moveToPrev();
-    startAutoSlide();
-});
-
-// Start auto-slide on page load
-startAutoSlide();
-
-// Change tab functionality
-window.changeTab = function(index) {
-    stopAutoSlide();
-    currentIndex = index;
-    updateCarousel();
-    startAutoSlide();
-    // Update active tab styling
-    carousel_tabs.forEach((tab, i) => {
-        if (i === index) {
-            tab.classList.add('active');
-        } else {
-            tab.classList.remove('active');
-        }
-    });
-};
-// Typewriter effect for the text
-//just copy from chadselph/jquery-typewriter .Thanks for the author.
 (function ($) {
     $.fn.typewrite = function (options) {
         var settings = {
@@ -112,6 +37,29 @@ window.changeTab = function(index) {
     };
 })(jQuery);
 
+let currentTabIndex = 0;
+let isTabAnimating = false;
+
+function updateActiveTabClass(activeIndex) {
+    const carouselTabs = document.querySelectorAll('.carousel-tab-item');
+    carouselTabs.forEach((tab, i) => {
+        tab.classList.toggle('active', i === activeIndex);
+    });
+}
+
+function setupCarousel() {
+    const carouselItems = document.querySelectorAll('.carousel-item');
+
+    carouselItems.forEach((item, i) => {
+        item.classList.remove('is-active', 'animating-in-left', 'animating-in-right', 'animating-out-left', 'animating-out-right');
+        if (i === 0) {
+            item.classList.add('is-active');
+        }
+    });
+
+    updateActiveTabClass(0);
+}
+
 $(document).ready(function () {
     // Create a dummy element to hold the text
     const text = '< Quypq147 />'
@@ -126,13 +74,48 @@ $(document).ready(function () {
             $('#type').css('color', 'white'); // Change color after typing
         }
     });
-    // Set initial active tab
-    carousel_tabs.forEach((tab, i) => {
-        if (i === 0) {
-            tab.classList.add('active');
-        } else {
-            tab.classList.remove('active');
-        }
-    });
+
+    setupCarousel();
 });
+
+function changeTab(index) {
+    const carouselItems = document.querySelectorAll('.carousel-item');
+
+    if (isTabAnimating || index === currentTabIndex || index < 0 || index >= carouselItems.length) {
+        return;
+    }
+
+    const currentItem = carouselItems[currentTabIndex];
+    const nextItem = carouselItems[index];
+    const isForward = index > currentTabIndex;
+
+    const outClass = isForward ? 'animating-out-left' : 'animating-out-right';
+    const inClass = isForward ? 'animating-in-right' : 'animating-in-left';
+
+    isTabAnimating = true;
+
+    nextItem.classList.add('is-active', inClass);
+    currentItem.classList.add(outClass);
+
+    const onAnimationEnd = function (event) {
+        if (event.target !== nextItem) {
+            return;
+        }
+
+        currentItem.classList.remove('is-active', 'animating-out-left', 'animating-out-right');
+        nextItem.classList.remove('animating-in-left', 'animating-in-right');
+
+        currentTabIndex = index;
+        updateActiveTabClass(currentTabIndex);
+        isTabAnimating = false;
+
+        nextItem.removeEventListener('animationend', onAnimationEnd);
+    };
+
+    nextItem.addEventListener('animationend', onAnimationEnd);
+}
+
+window.changeTab = changeTab;
+
+
 
